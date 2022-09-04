@@ -38,3 +38,9 @@ test("handling an unknown amount of numbers",()=>{
     expect(calcObject.add("1002,20,30,3000")).toBe(50);
     expect(calcObject.add("1004,1007,10067,8752")).toBe(0);
 })
+
+test("when string contains lower case alphabet",()=>{
+    expect(calcObject.add("a,c")).toBe(4);
+    expect(calcObject.add("1,3,a,d,10")).toBe(19);
+    expect(calcObject.add("1,20,10067,e,j,o,t,y,,,")).toBe(96);
+})
