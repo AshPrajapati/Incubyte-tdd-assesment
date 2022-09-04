@@ -23,3 +23,18 @@ test("when the string contains two or more adjacent commas",()=>{
     expect(calcObject.add("1,,3")).toBe(4);
     expect(calcObject.add("1,,3,,,6,")).toBe(10);
 })
+
+test("Numbers bigger than 1000 should be ignored",()=>{
+    expect(calcObject.add("2,1004")).toBe(2);
+    expect(calcObject.add("10000,7500")).toBe(0);
+    expect(calcObject.add("2,10,100,8,1050")).toBe(120);
+    expect(calcObject.add("10001,,7,2,1,,10002,")).toBe(10);
+})
+
+test("handling an unknown amount of numbers",()=>{
+    expect(calcObject.add("2,3")).toBe(5);
+    expect(calcObject.add("1,1,1,1,1,1,1,1,1,1,10,10")).toBe(30);
+    expect(calcObject.add("2,2,2,2,,,2")).toBe(10);
+    expect(calcObject.add("1002,20,30,3000")).toBe(50);
+    expect(calcObject.add("1004,1007,10067,8752")).toBe(0);
+})

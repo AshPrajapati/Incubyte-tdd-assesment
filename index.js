@@ -11,7 +11,7 @@ class StringCalculator{
         let sum=0;
 
         list_of_numbers.forEach(element => {
-            if(element!='')sum+=(+element);
+            if(element!='' && ((+element)<=1000) && ((+element)>=0))sum+=(+element);
         });
         return sum;
     }
