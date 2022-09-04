@@ -44,3 +44,8 @@ test("when string contains lower case alphabet",()=>{
     expect(calcObject.add("1,3,a,d,10")).toBe(19);
     expect(calcObject.add("1,20,10067,e,j,o,t,y,,,")).toBe(96);
 })
+
+test("handle new lines between numbers",()=>{
+    expect(calcObject.add("2\n5,5")).toBe(12);
+    expect(calcObject.add("2\n2\n2\n\n,,")).toBe(6);
+})

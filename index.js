@@ -7,7 +7,7 @@ class StringCalculator{
     
         if(numbers.length==1 && +numbers>=0 && +numbers<=9)return +numbers;
 
-        const list_of_numbers = numbers.split(",");
+        const list_of_numbers = numbers.split(/[\n,]+/);
         let sum=0;
 
         list_of_numbers.forEach(element => {
