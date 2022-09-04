@@ -49,3 +49,36 @@ test("handle new lines between numbers",()=>{
     expect(calcObject.add("2\n5,5")).toBe(12);
     expect(calcObject.add("2\n2\n2\n\n,,")).toBe(6);
 })
+
+test("Negative elements are not allowed",()=>{
+
+    //Test case 1: 
+    let negative_elements = [];
+    negative_elements.push(-5);
+    try
+    {
+        calcObject.add("-5,2");
+    }
+    catch(error)
+    {
+        expect(error).toBeInstanceOf(TypeError);
+        expect(error).toHaveProperty('message', "Negatives not allowed. Negative elements are: " + negative_elements);
+    }
+
+    //test case 2
+    negative_elements=[];
+    let to_pass = "-1,-2,-3,0,17,90";
+    const list_of_numbers = to_pass.split(/[\n,]+/);
+    list_of_numbers.forEach(element=>{
+        if(+element<0)negative_elements.push(+element);
+    })
+
+    try{
+        calcObject.add(to_pass);
+    }
+    catch(error)
+    {
+        expect(error).toBeInstanceOf(TypeError);
+        expect(error).toHaveProperty('message', "Negatives not allowed. Negative elements are: " + negative_elements);
+    }
+})
