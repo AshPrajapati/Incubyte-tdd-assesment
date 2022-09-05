@@ -64,8 +64,7 @@ test("handle new lines between numbers",()=>{
 test("Negative elements are not allowed",()=>{
 
     //Test case 1: 
-    let negative_elements = [];
-    negative_elements.push(-5);
+
     try
     {
         calcObject.add("-5,2");
@@ -73,24 +72,18 @@ test("Negative elements are not allowed",()=>{
     catch(error)
     {
         expect(error).toBeInstanceOf(TypeError);
-        expect(error).toHaveProperty('message', "Negatives not allowed. Negative elements are: " + negative_elements);
+        expect(error).toHaveProperty('message', "Negatives not allowed. Negative elements are: -5");
     }
 
     //test case 2
-    negative_elements=[];
-    let to_pass = "-1,-2,-3,0,17,90";
-    const list_of_numbers = to_pass.split(/[\n,]+/);
-    list_of_numbers.forEach(element=>{
-        if(+element<0)negative_elements.push(+element);
-    })
 
     try{
-        calcObject.add(to_pass);
+        calcObject.add("-1,-2,-3,0,17,90");
     }
     catch(error)
     {
         expect(error).toBeInstanceOf(TypeError);
-        expect(error).toHaveProperty('message', "Negatives not allowed. Negative elements are: " + negative_elements);
+        expect(error).toHaveProperty('message', "Negatives not allowed. Negative elements are: -1,-2,-3");
     }
 })
 
@@ -102,28 +95,13 @@ test("support different delimiters",()=>{
 
 /*test  12*/
 test("Negative elements with delimiter are not allowed",()=>{
-    let to_pass = "//;\n-1;-2;-3;0;17;90";
-    let regexpression=/[\n,]+/;
-    if(to_pass.length>=4 && to_pass.substring(0,2)=="//" && to_pass[3]=="\n")
-    {
-        let parameter = "[\\n"+to_pass[2]+"]+"
-        regexpression = new RegExp(parameter);
-        to_pass = to_pass.substring(4);
-    }
     
-    const list_of_numbers = to_pass.split(regexpression);
-    let negative_elements=[];
-
-    list_of_numbers.forEach(element=>{
-        if(+element<0)negative_elements.push(+element);
-    })
-
     try{
-        calcObject.add(to_pass);
+        calcObject.add("//;\n-1;-2;-3;0;17;90");
     }
     catch(error)
     {
         expect(error).toBeInstanceOf(TypeError);
-        expect(error).toHaveProperty('message', "Negatives not allowed. Negative elements are: " + negative_elements);
+        expect(error).toHaveProperty('message', "Negatives not allowed. Negative elements are: -1,-2,-3");
     }
 })
